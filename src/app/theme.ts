@@ -1,4 +1,4 @@
-import { extendTheme, ColorModeScript } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 import { mode } from '@chakra-ui/theme-tools';
 
 const theme = extendTheme({
@@ -13,6 +13,12 @@ const theme = extendTheme({
                 bg: mode('#FFFADD', '#141214')(props),
             },
         }),
+    },
+    colors: {
+        brand: {
+            light: 'orange',
+            dark: '#00ff9b',
+        }
     },
 });
 
