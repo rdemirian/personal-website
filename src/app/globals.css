@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
-html *{
+html * {
     font-family: "Space Mono", monospace;
 }
 
@@ -8,4 +6,63 @@ html *{
     font-size: 12vw;
     letter-spacing: 0.1rem;
     font-weight: 700;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 0 auto;
+    position: relative;
+    padding-left: 30;
+    padding-right: 30;
+    width: 0;
+    animation: typing 2s steps(5) forwards,
+               fade-in 1s;
+}
+
+@keyframes typing {
+    0% { width: 0; }
+    100% { width: 102%; }
+}
+
+.nameTitle::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: 0;
+    height: 70%;
+    width: 4px;
+    right: 0;
+    background-color: orange;
+    animation: cursor 0.53s step-end infinite alternate;
+}
+
+
+@keyframes cursor {
+    50% { opacity: 0; }
+}
+
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
+.nameTitleBox {
+    animation: fade-in 4s;
+}
+
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
+.navBar {
+    opacity: 0;
+    animation: fade-in 1s forwards;
+    animation-delay: 2.5s;
 }

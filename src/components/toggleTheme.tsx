@@ -11,7 +11,7 @@ const ToggleColorMode = () => {
             pos={"absolute"}
             top={0}
             right={0}
-            margin={"1rem"}
+            marginX={"1rem"}
             backgroundColor={colorMode === "light" ? "rgba(0, 0, 0, 0.1)" : "rgba(128, 128, 128, 0.3)"}
             _hover={{
                 backgroundColor: colorMode === "light" ? "rgba(0, 0, 0, 0.2)" : "rgba(128, 128, 128, 0.4)"
