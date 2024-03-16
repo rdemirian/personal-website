@@ -1,18 +1,47 @@
-'use client'
-import Header from "@/components/header";
-import Nav from "@/components/nav";
-import ToggleColorMode from "@/components/toggleTheme";
-import { Box, Stack, Text } from "@chakra-ui/react";
-
+"use client"
+import Header from "@/components/header"
+import Nav from "@/components/nav"
+import NightOwl from "@/components/nightOwl"
+import ProjectCardReel from "@/components/projectCardReel"
+import { Box, Stack, Text, useBreakpointValue } from "@chakra-ui/react"
 
 export default function Home() {
-  return (
-    <Box className="pageContents">
-      <Header showNav={false}></Header>
-      <Stack direction={'column'} align={'center'} py={'20vw'}>
-        <Nav></Nav>
-        <Box className="nameTitleBox"><Text className="nameTitle">Raffi</Text></Box>
-      </Stack>
-    </Box>
-  );
+	const showNav = useBreakpointValue({ base: false, sm: true })
+
+	return (
+		<Box className="pageContents" position="relative">
+			<Box>
+				<Header showNav={false}></Header>
+			</Box>
+			<Stack
+				direction={"column"}
+				align={"center"}
+				marginTop={"clamp(20px, 10vw, 200px)"}
+				position="relative"
+			>
+				{showNav && <Nav></Nav>}
+				<Box className="nameTitleBox">
+					<Text
+						className="nameTitle"
+						sx={{
+							fontSize: ["clamp(20px, 15vw, 200px)"],
+							letterSpacing: "0.1rem",
+							fontWeight: [700],
+						}}
+					>
+						Raffi
+					</Text>
+				</Box>
+				<Box
+					zIndex={"-1"}
+					position={"absolute"}
+					marginTop={"150px"}
+					className="nightowl"
+				>
+					<NightOwl />
+				</Box>
+				<ProjectCardReel></ProjectCardReel>
+			</Stack>
+		</Box>
+	)
 }
