@@ -1,16 +1,21 @@
 "use client"
 import { Link, Stack, useBreakpointValue, useColorMode } from "@chakra-ui/react"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { css, keyframes } from "@emotion/react"
 import { usePathname } from "next/navigation"
 
 // Define the keyframes
-const fadeIn = keyframes`
-  from {
+const bounceIn = keyframes`
+  0% {
     opacity: 0;
+    transform: translateY(-100%);
   }
-  to {
+  70% {
+    transform: translateY(10%);
+  }
+  100% {
     opacity: 1;
+    transform: translateY(0);
   }
 `
 
@@ -27,23 +32,36 @@ const Nav: React.FC = () => {
 	const pathname = usePathname()
 	const isActive = (path: string) => path === pathname
 
+	const [animatedLinks, setAnimatedLinks] = useState<number[]>([])
+
+	useEffect(() => {
+		// Generate an array of link IDs in the original order
+		const originalOrder = NavLinks.map((link) => link.id)
+		setAnimatedLinks(originalOrder)
+	}, [])
+
 	return (
 		<Stack
-			css={css`
-				opacity: ${fadeInNav ? 0 : 1};
-				animation: ${fadeInNav ? fadeIn : "none"} 1s forwards;
-				animation-delay: 2.5s;
-			`}
 			direction={["column", "row"]}
-			gap={["30px", "14"]}
+			gap={["30px", "12", "14"]}
 			bottom={0}
 			paddingTop={["60%", "8px"]}
 			align={"center"}
 			fontSize={["24px", "16px", "16px", "20px", "24px"]}
 		>
-			{NavLinks.map((link) => {
+			{animatedLinks.map((id, index) => {
+				const link = NavLinks.find((link) => link.id === id)
+				if (!link) return null
 				return (
-					<Stack key={link.id}>
+					<Stack
+						key={link.id}
+						css={css`
+							animation: ${fadeInNav ? bounceIn : "none"} 0.5s forwards;
+							animation-delay: ${2 + Math.random()}s;
+							opacity: ${fadeInNav ? 0 : 1};
+							animation-fill-mode: both;
+						`}
+					>
 						<Link
 							href={link.path}
 							className={

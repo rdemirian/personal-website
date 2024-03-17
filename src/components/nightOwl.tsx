@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useRef, useEffect } from "react"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/Addons.js"
@@ -7,6 +8,9 @@ let renderer: THREE.WebGLRenderer
 
 const NightOwl = () => {
 	const sceneRef = useRef<HTMLDivElement>(null)
+	const canvasHeight = Math.min(window.innerWidth * 0.5, 350)
+	const canvasWidth = Math.min(window.innerWidth * 0.8, 700)
+	const canvasRatio = canvasWidth / canvasHeight
 	const previousMousePosition = {
 		x: 0,
 		y: 0,
@@ -20,12 +24,7 @@ const NightOwl = () => {
 		if (!renderer) {
 			renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
 		}
-		camera = new THREE.PerspectiveCamera(
-			45,
-			window.innerWidth / window.innerHeight,
-			0.1,
-			1000
-		)
+		camera = new THREE.PerspectiveCamera(20, canvasRatio, 0.1, 1000)
 		scene = new THREE.Scene()
 		const loader = new GLTFLoader()
 
@@ -33,7 +32,7 @@ const NightOwl = () => {
 
 		if (!mount) return
 
-		renderer.setSize(window.innerWidth, window.innerHeight)
+		renderer.setSize(canvasWidth, canvasHeight)
 		renderer.shadowMap.enabled = true
 		renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
@@ -121,11 +120,9 @@ const NightOwl = () => {
 	}, [])
 
 	const onWindowResize = () => {
-		const width = window.innerWidth
-		const height = window.innerHeight
-		camera.aspect = width / height
+		camera.aspect = canvasRatio
 		camera.updateProjectionMatrix()
-		renderer.setSize(width, height)
+		renderer.setSize(canvasWidth, canvasHeight)
 	}
 
 	const onMouseDown = (event: MouseEvent) => {
@@ -214,7 +211,7 @@ const NightOwl = () => {
 		renderer.render(scene, camera)
 	}
 
-	return <div ref={sceneRef} />
+	return <div ref={sceneRef} className="nightOwl" />
 }
 
 export default NightOwl

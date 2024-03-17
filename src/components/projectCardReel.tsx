@@ -10,7 +10,8 @@ const ProjectCardReel: React.FC<ProjectCardReelProps> = ({}) => {
 		<Grid
 			gap={"16px"}
 			templateColumns={["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"]}
-			maxWidth={"80%"}
+			maxWidth={"1100px"}
+			width={"80%"}
 			className="homepageProjectReel"
 		>
 			<ProjectCard

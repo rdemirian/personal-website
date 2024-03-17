@@ -55,14 +55,20 @@ li {
 	animation: fade-in 4s;
 }
 
+.nightOwl {
+	opacity: 0;
+	animation: fade-in 1s forwards;
+	animation-delay: 3s;
+}
+
+.intro {
+	opacity: 0;
+	animation: fade-in 1s forwards;
+	animation-delay: 3.5s;
+}
+
 .homepageProjectReel {
 	opacity: 0;
 	animation: fade-in 1s forwards;
-	animation-delay: 2.5s;
-}
-
-.nightowl {
-	opacity: 0;
-	animation: fade-in 1s forwards;
-	animation-delay: 2.5s;
+	animation-delay: 4s;
 }
