@@ -1,0 +1,83 @@
+[
+	{
+		"index": 0,
+		"year": "2016",
+		"company": "Dan Murphy's",
+		"title": "Customer Service Analyst - Dans Online",
+		"description": [
+			"Website Tech Improvements",
+			"E-Commerce improvements",
+			"Act as a point of reference for colleagues",
+			"Answer escalated incoming calls from customers regarding products, pricing and phone orders"
+		]
+	},
+	{
+		"index": 1,
+		"year": "2017",
+		"company": "Scentre Group",
+		"title": "Customer Care Specialist",
+		"description": [
+			"Identify development opportunities",
+			"Work with tech teams to implement new software and new rollouts of parking technology",
+			"Familiar with parking WH&S standards to ensure interactions and instructions provided to customers is compliant",
+			"Communicate with customers, employees, and other individuals to answer questions, disseminate or explain information, take orders, and address complaints",
+			"Identify and implement opportunities for process improvement",
+			"Using business knowledge investigate, troubleshoot and resolve customer service inquiries"
+		],
+		"extraTitle": "Accomplishments",
+		"extra": ["SME acting as a point of reference for colleagues"]
+	},
+	{
+		"index": 2,
+		"year": "2020",
+		"company": "Scentre Group",
+		"title": "Customer Care Supervisor",
+		"description": [
+			"Manage day to day customer care centre operations",
+			"Lead the delivery of customer service excellence",
+			"Work with tech teams to implement new software and new rollouts of parking technology",
+			"Ensure compliance with customer service financial targets, Policies and Procedures",
+			"Identify and implement opportunities for process improvement",
+			"Using business knowledge investigate, troubleshoot and resolve customer service inquiries"
+		],
+		"extraTitle": "Accomplishments",
+		"extra": [
+			"Led the launch and set-up of customer care infrastructure for Westfield Direct",
+			"Co-led a team of over 50 customer care representatives",
+			"Developed many innovative and time-saving solutions changing the way of working for my team"
+		]
+	},
+	{
+		"index": 3,
+		"year": "2022",
+		"company": "Scentre Group",
+		"title": "Integration Specialist",
+		"description": [
+			"Work alongside the technical team from our sellers and integration partners to support them through marketplace onboarding",
+			"Prioritize and plan activities/developments base on business decisions, customer needs and customer impacts",
+			"Maintain extensive understanding of partner and e-commerce platform APIs",
+			"Identify strategies for improvement and expansion across all areas of the business",
+			"Work with tech teams to implement new software",
+			"Manage retailer, partner, internal team and stakeholder relationships"
+		],
+		"extraTitle": "Accomplishments",
+		"extra": [
+			"Manage partner relationships",
+			"Onboard over 130 retailers to the Westfield Online (formerly Westfield Direct) platform in less than 1 year"
+		]
+	},
+	{
+		"index": 4,
+		"year": "2023",
+		"company": "Scentre Group",
+		"title": "Software Engineer",
+		"description": [
+			"Work on web and marketplace",
+			"Contribute to leading, building and testing features",
+			"Own front-end bug fixes and maintenance",
+			"Support product release cycles"
+		],
+		"extraTitle": "Stack",
+		"extra": ["HTML, CSS, JavaScript, TypeScript, React, Python, Next"]
+	}
+]

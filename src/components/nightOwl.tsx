@@ -2,38 +2,60 @@ import React, { useRef, useEffect } from "react"
 import * as THREE from "three"
 import { GLTFLoader } from "three/examples/jsm/Addons.js"
 
-// Declare renderer variable outside the component
 let renderer: THREE.WebGLRenderer
 
 const NightOwl = () => {
 	const sceneRef = useRef<HTMLDivElement>(null)
-	const previousMousePosition = {
-		x: 0,
-		y: 0,
-	}
-	let dragging = false
-	let rotationVelocity = 0
-	let scene: THREE.Scene
-	let camera: THREE.PerspectiveCamera
+	const canvasHeightRef = useRef<number>(0)
+	const canvasWidthRef = useRef<number>(0)
+	const canvasRatioRef = useRef<number>(0)
+
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			canvasHeightRef.current = Math.min(window.innerWidth * 0.5, 350)
+			canvasWidthRef.current = Math.min(window.innerWidth * 0.8, 700)
+			canvasRatioRef.current = canvasWidthRef.current / canvasHeightRef.current
+		}
+	}, [])
 
 	useEffect(() => {
 		if (!renderer) {
 			renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
 		}
-		camera = new THREE.PerspectiveCamera(
-			45,
-			window.innerWidth / window.innerHeight,
-			0.1,
-			1000
-		)
+
+		const canvasHeight = canvasHeightRef.current
+		const canvasWidth = canvasWidthRef.current
+		const canvasRatio = canvasRatioRef.current
+
+		let dragging = false
+		let rotationVelocity = 0
+		let scene: THREE.Scene
+		let camera: THREE.PerspectiveCamera
+
+		const animate = () => {
+			requestAnimationFrame(animate)
+
+			if (!dragging) {
+				rotationVelocity *= 0.98
+				scene.rotation.y += rotationVelocity
+				if (Math.abs(rotationVelocity) < 0.0001) {
+					rotationVelocity = 0
+				}
+			}
+
+			scene.rotation.y += 0.002
+			renderer.render(scene, camera)
+		}
+
+		if (!sceneRef.current) return
+
+		camera = new THREE.PerspectiveCamera(20, canvasRatio, 0.1, 1000)
 		scene = new THREE.Scene()
 		const loader = new GLTFLoader()
 
 		const mount = sceneRef.current
 
-		if (!mount) return
-
-		renderer.setSize(window.innerWidth, window.innerHeight)
+		renderer.setSize(canvasWidth, canvasHeight)
 		renderer.shadowMap.enabled = true
 		renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
@@ -94,6 +116,87 @@ const NightOwl = () => {
 		floorMesh.castShadow = false
 		scene.add(floorMesh)
 
+		const onWindowResize = () => {
+			camera.aspect = canvasRatio
+			camera.updateProjectionMatrix()
+			renderer.setSize(canvasWidth, canvasHeight)
+		}
+
+		const onMouseDown = (event: MouseEvent) => {
+			scene.rotation.y = Math.floor(Math.random() * 21) - 10
+			dragging = true
+			previousMousePosition.x = event.clientX
+			previousMousePosition.y = event.clientY
+			renderer.domElement.style.cursor = "grabbing"
+		}
+
+		const onMouseUp = () => {
+			if (dragging) {
+				dragging = false
+				rotationVelocity = (scene.rotation.y - previousRotation) * 0.05
+				previousRotation = scene.rotation.y
+				if (Math.abs(rotationVelocity) < 0.0001) {
+					rotationVelocity = 0
+				}
+			}
+			renderer.domElement.style.cursor = "grab"
+		}
+
+		const onMouseMove = (event: MouseEvent) => {
+			if (dragging && event.buttons === 1) {
+				const deltaMove = {
+					x: event.clientX - previousMousePosition.x,
+					y: event.clientY - previousMousePosition.y,
+				}
+
+				scene.rotation.y += deltaMove.x * 0.01
+
+				previousMousePosition.x = event.clientX
+				previousMousePosition.y = event.clientY
+			}
+		}
+
+		const onTouchStart = (event: TouchEvent) => {
+			scene.rotation.y = Math.floor(Math.random() * 21) - 10
+			if (event.touches.length === 1) {
+				dragging = true
+				previousMousePosition.x = event.touches[0].clientX
+				previousMousePosition.y = event.touches[0].clientY
+				renderer.domElement.style.cursor = "grabbing"
+			}
+		}
+
+		const onTouchEnd = () => {
+			if (dragging) {
+				dragging = false
+				rotationVelocity = (scene.rotation.y - rotationVelocity) * 0.05
+				if (Math.abs(rotationVelocity) < 0.0001) {
+					rotationVelocity = 0
+				}
+			}
+			renderer.domElement.style.cursor = "grab"
+		}
+
+		const onTouchMove = (event: TouchEvent) => {
+			if (dragging && event.touches.length === 1) {
+				const deltaMove = {
+					x: event.touches[0].clientX - previousMousePosition.x,
+					y: event.touches[0].clientY - previousMousePosition.y,
+				}
+
+				scene.rotation.y += deltaMove.x * 0.01
+
+				previousMousePosition.x = event.touches[0].clientX
+				previousMousePosition.y = event.touches[0].clientY
+			}
+		}
+
+		let previousMousePosition = {
+			x: 0,
+			y: 0,
+		}
+		let previousRotation = 0
+
 		window.addEventListener("resize", onWindowResize)
 		renderer.domElement.addEventListener("mousedown", onMouseDown)
 		renderer.domElement.addEventListener("mouseup", onMouseUp)
@@ -117,104 +220,9 @@ const NightOwl = () => {
 			renderer.domElement.removeEventListener("touchend", onTouchEnd)
 			renderer.domElement.removeEventListener("touchmove", onTouchMove)
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	const onWindowResize = () => {
-		const width = window.innerWidth
-		const height = window.innerHeight
-		camera.aspect = width / height
-		camera.updateProjectionMatrix()
-		renderer.setSize(width, height)
-	}
-
-	const onMouseDown = (event: MouseEvent) => {
-		scene.rotation.y = Math.floor(Math.random() * 21) - 10
-		dragging = true
-		previousMousePosition.x = event.clientX
-		previousMousePosition.y = event.clientY
-		renderer.domElement.style.cursor = "grabbing"
-	}
-
-	const onMouseUp = () => {
-		if (dragging) {
-			dragging = false
-			rotationVelocity = (scene.rotation.y - previousRotation) * 0.05
-			previousRotation = scene.rotation.y
-			if (Math.abs(rotationVelocity) < 0.0001) {
-				rotationVelocity = 0
-			}
-		}
-		renderer.domElement.style.cursor = "grab"
-	}
-
-	const onMouseMove = (event: MouseEvent) => {
-		if (dragging && event.buttons === 1) {
-			const deltaMove = {
-				x: event.clientX - previousMousePosition.x,
-				y: event.clientY - previousMousePosition.y,
-			}
-
-			scene.rotation.y += deltaMove.x * 0.01
-
-			previousMousePosition.x = event.clientX
-			previousMousePosition.y = event.clientY
-		}
-	}
-
-	const onTouchStart = (event: TouchEvent) => {
-		scene.rotation.y = Math.floor(Math.random() * 21) - 10
-		if (event.touches.length === 1) {
-			dragging = true
-			previousMousePosition.x = event.touches[0].clientX
-			previousMousePosition.y = event.touches[0].clientY
-			renderer.domElement.style.cursor = "grabbing"
-		}
-	}
-
-	const onTouchEnd = () => {
-		if (dragging) {
-			dragging = false
-			rotationVelocity = (scene.rotation.y - rotationVelocity) * 0.05
-			if (Math.abs(rotationVelocity) < 0.0001) {
-				rotationVelocity = 0
-			}
-		}
-		renderer.domElement.style.cursor = "grab"
-	}
-
-	const onTouchMove = (event: TouchEvent) => {
-		if (dragging && event.touches.length === 1) {
-			const deltaMove = {
-				x: event.touches[0].clientX - previousMousePosition.x,
-				y: event.touches[0].clientY - previousMousePosition.y,
-			}
-
-			scene.rotation.y += deltaMove.x * 0.01
-
-			previousMousePosition.x = event.touches[0].clientX
-			previousMousePosition.y = event.touches[0].clientY
-		}
-	}
-
-	let previousRotation = 0
-
-	const animate = () => {
-		requestAnimationFrame(animate)
-
-		if (!dragging) {
-			rotationVelocity *= 0.98
-			scene.rotation.y += rotationVelocity
-			if (Math.abs(rotationVelocity) < 0.0001) {
-				rotationVelocity = 0
-			}
-		}
-
-		scene.rotation.y += 0.002
-		renderer.render(scene, camera)
-	}
-
-	return <div ref={sceneRef} />
+	return <div ref={sceneRef} className="nightOwl" />
 }
 
 export default NightOwl

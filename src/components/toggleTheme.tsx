@@ -10,8 +10,8 @@ const ToggleColorMode = () => {
 			aria-label={"Toggle Theme Colour"}
 			pos={"absolute"}
 			top={0}
-			right={0}
-			marginX={"1rem"}
+			right={[0]}
+			margin={"1rem"}
 			backgroundColor={
 				colorMode === "light"
 					? "rgba(0, 0, 0, 0.1)"

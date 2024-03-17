@@ -42,6 +42,8 @@ const Hamburger = () => {
 							colorMode === "light"
 								? "rgba(0, 0, 0, 0.1)"
 								: "rgba(128, 128, 128, 0.3)",
+						position: "absolute",
+						left: "1em",
 					}}
 					aria-label={isOpen ? "Close Menu" : "Open Menu"}
 					icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}

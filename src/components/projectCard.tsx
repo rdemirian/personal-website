@@ -2,7 +2,6 @@ import {
 	Card,
 	CardHeader,
 	CardBody,
-	CardFooter,
 	Heading,
 	Box,
 	Stack,
@@ -22,14 +21,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 	return (
 		<Card
 			variant={"elevated"}
-			colorScheme={"messenger"}
 			sx={{
 				backgroundColor:
 					theme === "light" ? "rgba(0, 0, 0, 0.1)" : "rgba(128, 128, 128, 0.4)",
 				borderRadius: "15px",
 				minHeight: 150,
 				maxHeight: 300,
-				color: theme === "light" ? "#141214" : "#FFFADD",
+				color: theme === "light" ? "#252425" : "#FFFADD",
 			}}
 		>
 			<CardHeader padding={"10px"}>

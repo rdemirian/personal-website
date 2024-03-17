@@ -13,22 +13,17 @@ const Header: React.FC<HeaderProps> = ({ showNav: initialShowNav = true }) => {
 	return (
 		<Stack
 			direction={"row"}
-			align={"center"}
-			margin={"1rem"}
-			paddingBottom={"30px"}
+			justify={"center"} // Center the content horizontally
+			width={"100%"} // Set width to 100% to span the entire width of the screen
+			padding={"1rem"} // Adjust padding as needed
 		>
+			<Hamburger />
 			{showNav && (
-				<Box
-					bottom={0}
-					position={"absolute"}
-					sx={{
-						top: 0,
-					}}
-				>
-					<Nav></Nav>
+				<Box>
+					<Nav />
 				</Box>
 			)}
-			<Hamburger></Hamburger>
+
 			<ToggleColorMode />
 		</Stack>
 	)
