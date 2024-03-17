@@ -13,6 +13,7 @@ li {
 	padding-right: 30;
 	width: 0;
 	animation: typing 2s steps(5) forwards, fade-in 1s;
+	animation-delay: 1.5s;
 }
 
 @keyframes typing {
@@ -58,17 +59,17 @@ li {
 .nightOwl {
 	opacity: 0;
 	animation: fade-in 1s forwards;
-	animation-delay: 3s;
+	animation-delay: 4s;
 }
 
 .intro {
 	opacity: 0;
 	animation: fade-in 1s forwards;
-	animation-delay: 3.5s;
+	animation-delay: 4.5s;
 }
 
 .homepageProjectReel {
 	opacity: 0;
 	animation: fade-in 1s forwards;
-	animation-delay: 4s;
+	animation-delay: 5s;
 }

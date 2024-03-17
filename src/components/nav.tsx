@@ -57,7 +57,7 @@ const Nav: React.FC = () => {
 						key={link.id}
 						css={css`
 							animation: ${fadeInNav ? bounceIn : "none"} 0.5s forwards;
-							animation-delay: ${2 + Math.random()}s;
+							animation-delay: ${3 + Math.random()}s;
 							opacity: ${fadeInNav ? 0 : 1};
 							animation-fill-mode: both;
 						`}

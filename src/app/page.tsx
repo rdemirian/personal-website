@@ -1,15 +1,25 @@
 "use client"
 import Header from "@/components/header"
 import IntroCard from "@/components/introCard"
-import Nav from "@/components/nav"
 import NightOwl from "@/components/nightOwl"
-import ProjectCardReel from "@/components/projectCardReel"
 import { Box, Stack, Text, useBreakpointValue } from "@chakra-ui/react"
+import { useEffect, useState } from "react"
 
 export default function Home() {
+	const [height, setHeight] = useState("")
+	const [size, setSize] = useState("")
+
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			const windowHeight = window.innerHeight
+			const newHeight = windowHeight < 1000 ? "10vh" : "10vw"
+			const newSize = windowHeight < 1000 ? "100px" : "180px"
+			setHeight(newHeight)
+			setSize(newSize)
+		}
+	}, [])
+
 	const showNav = useBreakpointValue({ base: false, sm: true })
-	const height = window.innerHeight < 1000 ? "10vh" : "10vw"
-	const size = window.innerHeight < 1000 ? "100px" : "180px"
 
 	return (
 		<Box position="relative">
@@ -23,7 +33,7 @@ export default function Home() {
 				position="relative"
 				gap={"1em"}
 			>
-				{/*{showNav && <Nav></Nav>}*/}
+				{/* {showNav && <Nav></Nav>} */}
 				<Box className="nameTitleBox">
 					<Text
 						className="nameTitle"
