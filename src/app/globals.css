@@ -73,3 +73,14 @@ li {
 	animation: fade-in 1s forwards;
 	animation-delay: 5s;
 }
+
+.hamburgerIcon {
+	opacity: 0;
+	animation: fade-in 1s forwards;
+	animation-delay: 4.5s;
+}
+.themeIcon {
+	opacity: 0;
+	animation: fade-in 1s forwards;
+	animation-delay: 4.5s;
+}
