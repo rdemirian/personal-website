@@ -1,4 +1,3 @@
-"use client"
 import { Link, Stack, useBreakpointValue, useColorMode } from "@chakra-ui/react"
 import React, { useEffect, useState } from "react"
 import { css, keyframes } from "@emotion/react"
@@ -21,9 +20,9 @@ const bounceIn = keyframes`
 
 const NavLinks = [
 	{ id: 1, name: "Home", path: "/" },
-	{ id: 2, name: "About", path: "/about" },
-	{ id: 3, name: "Projects", path: "/projects" },
-	{ id: 4, name: "Contact", path: "/contact" },
+	//{ id: 2, name: "About", path: "/about" },
+	//{ id: 3, name: "Projects", path: "/projects" },
+	//{ id: 4, name: "Contact", path: "/contact" },
 ]
 
 const Nav: React.FC = () => {
@@ -52,6 +51,7 @@ const Nav: React.FC = () => {
 			{animatedLinks.map((id, index) => {
 				const link = NavLinks.find((link) => link.id === id)
 				if (!link) return null
+				if (isActive(link.path) && link.path === "/") return null // Hide home link when active path is "/"
 				return (
 					<Stack
 						key={link.id}
@@ -65,12 +65,9 @@ const Nav: React.FC = () => {
 						<Link
 							href={link.path}
 							className={
-								isActive(link.path) && link.path !== "/"
-									? "page.activePage"
-									: "page.nonActivePage"
+								isActive(link.path) ? "page.activePage" : "page.nonActivePage"
 							}
 							style={{
-								// Add styles here for individual links
 								color: isActive(link.path)
 									? "orange"
 									: colorMode === "dark"
