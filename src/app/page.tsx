@@ -44,7 +44,7 @@ export default function Home() {
 							marginY: "-20px",
 						}}
 					>
-						Raffi
+						raffi
 					</Text>
 				</Box>
 				<NightOwl />
