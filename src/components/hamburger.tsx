@@ -47,6 +47,7 @@ const Hamburger = () => {
 					}}
 					aria-label={isOpen ? "Close Menu" : "Open Menu"}
 					icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+					className="hamburgerIcon"
 					_hover={{
 						backgroundColor:
 							colorMode === "light"
