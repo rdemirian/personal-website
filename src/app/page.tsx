@@ -2,6 +2,7 @@
 import Header from "@/components/header"
 import IntroCard from "@/components/introCard"
 import NightOwl from "@/components/nightOwl"
+import Timeline from "@/components/timeline"
 import { Box, Stack, Text, useBreakpointValue } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 
@@ -13,7 +14,7 @@ export default function Home() {
 		if (typeof window !== "undefined") {
 			const windowHeight = window.innerHeight
 			const newHeight = windowHeight < 1000 ? "10vh" : "10vw"
-			const newSize = windowHeight < 1000 ? "100px" : "180px"
+			const newSize = windowHeight < 1000 ? "150px" : "200px"
 			setHeight(newHeight)
 			setSize(newSize)
 		}
@@ -33,7 +34,6 @@ export default function Home() {
 				position="relative"
 				gap={"1em"}
 			>
-				{/* {showNav && <Nav></Nav>} */}
 				<Box className="nameTitleBox">
 					<Text
 						className="nameTitle"
@@ -60,6 +60,7 @@ export default function Home() {
 						para2={
 							"I am currently focusing on helping local businesses strengthen their positions in the web space offering builds, UI/UX guidance and marketplace support."
 						}
+						showDivider={true}
 					></IntroCard>
 				</Stack>
 			</Stack>

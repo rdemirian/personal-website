@@ -59,7 +59,7 @@ li {
 .nightOwl {
 	opacity: 0;
 	animation: fade-in 1s forwards;
-	animation-delay: 4s;
+	animation-delay: 4.5s;
 }
 
 .intro {
@@ -74,13 +74,14 @@ li {
 	animation-delay: 5s;
 }
 
-.hamburgerIcon {
+.aboutSummary {
 	opacity: 0;
 	animation: fade-in 1s forwards;
-	animation-delay: 4.5s;
+	animation-delay: 1s;
 }
-.themeIcon {
+
+.timeline {
 	opacity: 0;
 	animation: fade-in 1s forwards;
-	animation-delay: 4.5s;
+	animation-delay: 3s;
 }
