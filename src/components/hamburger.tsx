@@ -10,6 +10,22 @@ import {
 } from "@chakra-ui/react"
 import Nav from "./nav"
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
+import { keyframes, css } from "@emotion/react"
+import { usePathname } from "next/navigation"
+
+const bounceIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  70% {
+    transform: translateY(10%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
 
 const Hamburger = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -17,6 +33,9 @@ const Hamburger = () => {
 	const showBurger = useBreakpointValue({ base: true, sm: false })
 	const [showBackdropFilter, setShowBackdropFilter] = useState(false)
 	const [showOtherStuff, setshowOtherStuff] = useState(false)
+	const pathname = usePathname()
+	let delay = pathname === "/" ? 3.5 : 0.5
+	delay += Math.random() * 0.5
 
 	const handleDrawerOpen = () => {
 		onOpen()
@@ -42,8 +61,6 @@ const Hamburger = () => {
 							colorMode === "light"
 								? "rgba(0, 0, 0, 0.1)"
 								: "rgba(128, 128, 128, 0.3)",
-						position: "absolute",
-						left: "1em",
 					}}
 					aria-label={isOpen ? "Close Menu" : "Open Menu"}
 					icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -54,6 +71,12 @@ const Hamburger = () => {
 								? "rgba(0, 0, 0, 0.2)"
 								: "rgba(128, 128, 128, 0.4)",
 					}}
+					css={css`
+						animation: ${bounceIn} 1s forwards;
+						animation-delay: ${delay}s;
+						opacity: 0;
+						animation-fill-mode: both;
+					`}
 				/>
 			)}
 			<div
@@ -88,8 +111,8 @@ const Hamburger = () => {
 						onClick={handleDrawerClose}
 						visibility={showOtherStuff ? "visible" : "hidden"}
 						position="absolute"
-						top="1rem"
-						right="1rem"
+						top=".5rem"
+						right=".5rem"
 						aria-label="Close"
 						icon={<CloseIcon />}
 						sx={{

@@ -1,9 +1,33 @@
 [
 	{
 		"index": 0,
+		"year": "2015",
+		"company": "STM International",
+		"title": "Sales/Merchandiser",
+		"description": [
+			"Customer service and sales",
+			"Built positive rapport with customers and understanding their needs",
+			"Driving business sales including upselling",
+			"Monitoring and reporting on business sales"
+		]
+	},
+	{
+		"index": 1,
+		"year": "2016",
+		"company": "BlueInc Group",
+		"title": "Outbound Sales Analyst - 2IC",
+		"description": [
+			"Assist in the management of a small team of sales representatives",
+			"Motivate, coach and support sales representatives",
+			"Act as a point of reference for colleagues",
+			"Call  clients, generating interest and close"
+		]
+	},
+	{
+		"index": 2,
 		"year": "2016",
 		"company": "Dan Murphy's",
-		"title": "Customer Service Analyst - Dans Online",
+		"title": "Customer Service Analyst",
 		"description": [
 			"Website Tech Improvements",
 			"E-Commerce improvements",
@@ -12,7 +36,7 @@
 		]
 	},
 	{
-		"index": 1,
+		"index": 3,
 		"year": "2017",
 		"company": "Scentre Group",
 		"title": "Customer Care Specialist",
@@ -28,7 +52,7 @@
 		"extra": ["SME acting as a point of reference for colleagues"]
 	},
 	{
-		"index": 2,
+		"index": 4,
 		"year": "2020",
 		"company": "Scentre Group",
 		"title": "Customer Care Supervisor",
@@ -48,10 +72,10 @@
 		]
 	},
 	{
-		"index": 3,
+		"index": 5,
 		"year": "2022",
 		"company": "Scentre Group",
-		"title": "Integration Specialist",
+		"title": "E-Commerce Integration Specialist",
 		"description": [
 			"Work alongside the technical team from our sellers and integration partners to support them through marketplace onboarding",
 			"Prioritize and plan activities/developments base on business decisions, customer needs and customer impacts",
@@ -67,7 +91,7 @@
 		]
 	},
 	{
-		"index": 4,
+		"index": 6,
 		"year": "2023",
 		"company": "Scentre Group",
 		"title": "Software Engineer",
